@@ -11,14 +11,24 @@ type Storage interface {
 }
 
 type PostgresStore struct {
-	db       *sql.DB
-	Users    IUsersRepo
-	Posts    IPostsRepo
-	Comments ICommentsRepo
+	db *sql.DB
 }
 
-func (s *PostgresStore) NewPostgresStore(db *sql.DB) *PostgresStore {
-	return &PostgresStore{db: db, Posts: NewPostRepo(db),
-		Users:    NewUsersRepo(db),
-		Comments: NewCommentRepo(db)}
+// Comments implements Storage.
+func (p PostgresStore) Comments() ICommentsRepo {
+	return NewCommentRepo(p.db)
+}
+
+// Posts implements Storage.
+func (p PostgresStore) Posts() IPostsRepo {
+	return NewPostRepo(p.db)
+}
+
+// Users implements Storage.
+func (p PostgresStore) Users() IUsersRepo {
+	return NewUsersRepo(p.db)
+}
+
+func NewStore(db *sql.DB) Storage {
+	return PostgresStore{db: db}
 }

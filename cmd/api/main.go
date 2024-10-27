@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/meetup/interals/env"
+	"github.com/meetup/interals/store"
 )
 
 // type server struct {
@@ -47,7 +48,11 @@ func main() {
 		panic(err)
 	}
 
-	app := App{config: Config{addr: env.GetEnv("ADDR", ":8080")}}
+	store := store.NewStore(db)
+
+	app := App{config: Config{addr: env.GetEnv("ADDR", ":8080")},
+		store: store}
+
 	mux := app.mount()
 	if err := app.run(mux); err != nil {
 		log.Fatal("Server Crashed")

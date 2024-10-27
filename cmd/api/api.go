@@ -6,10 +6,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/meetup/interals/store"
 )
 
 type App struct {
 	config Config
+	store  store.Storage
 }
 
 type Config struct {
@@ -56,5 +58,6 @@ func (a *App) run(mux http.Handler) error {
 
 func (a *App) healthCheckHandler(ctx *gin.Context) {
 	res := map[string]string{"message": "ok"}
+
 	ctx.JSON(200, res)
 }
