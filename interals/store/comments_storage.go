@@ -20,16 +20,16 @@ func NewCommentRepo(db *sql.DB) *CommentsRepo {
 	return &CommentsRepo{db: db}
 }
 func (p *CommentsRepo) Get(context.Context, string) (*Users, error) {
-	query := "SELECT * FROM users WHERE id = %s"
 
+	return nil, nil
 }
 
 func (p *CommentsRepo) Create(context.Context, Users) error {
-
+	return nil
 }
 func (p *CommentsRepo) Update(context.Context, string, Users) error {
-
+	return nil
 }
 func (p *CommentsRepo) Delete(context.Context, string) error {
-
+	return nil
 }

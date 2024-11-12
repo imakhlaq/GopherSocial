@@ -19,11 +19,12 @@ type Config struct {
 }
 
 func (a *App) mount() http.Handler {
-	/*	//new mux
-		mux := http.NewServeMux()
-		//end points
-		mux.HandleFunc("GET /v1/health", a.health)
-		return mux
+	/*
+		   //new mux
+			mux := http.NewServeMux()
+			//end points
+			mux.HandleFunc("GET /v1/health", a.health)
+			return mux
 	*/
 
 	//changing to Gin
@@ -57,6 +58,7 @@ func (a *App) run(mux http.Handler) error {
 }
 
 func (a *App) healthCheckHandler(ctx *gin.Context) {
+
 	res := map[string]string{"message": "ok"}
 
 	ctx.JSON(200, res)
